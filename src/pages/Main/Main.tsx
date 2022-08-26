@@ -8,7 +8,6 @@ const Main: FC = observer(() => {
 
   return (
     <div className="container">
-      <div className="text-center text-2xl mb-3 py-4">Todo Desk</div>
       <div className="flex justify-between">
         {
           deskStore.desks.map((desk) => <Desk key={desk.id} desk={desk}/>)

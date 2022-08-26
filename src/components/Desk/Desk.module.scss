@@ -1,0 +1,13 @@
+.drop {
+  box-shadow: inset 0 -4px 0 gray;
+}
+
+.draggable:active {
+  animation: drag_style .1s;
+}
+
+@keyframes drag_style {
+  0% {background-color: #fc0;}
+  99% {background-color: #fc0;}
+  100% {background-color: #ccc;}
+}

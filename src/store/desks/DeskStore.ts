@@ -16,7 +16,9 @@ export default class DeskStore {
       items: [
         { title: '3 task', id: nanoid(6) },
         { title: '4 task', id: nanoid(6) },
-        { title: '5 task', id: nanoid(6) }
+        { title: '5 task', id: nanoid(6) },
+        { title: '6 task', id: nanoid(6) },
+        { title: '7 task', id: nanoid(6) },
       ]
     }
   ]
@@ -28,9 +30,15 @@ export default class DeskStore {
     makeAutoObservable(this)
   }
 
-  addTask(desk: IDesk, task: ITask) {
+  addTask(desk: IDesk, task: ITask, idx?: number) {
     const deskIndex = this.desks.findIndex((it) => it.id === desk.id)
-    this.desks[deskIndex] = { ...desk, items: [...desk.items, task] }
+    const updatedItems = desk.items.filter((it) => it.id !== task.id)
+    if (idx || idx === 0) {
+      updatedItems.splice(idx, 0, task)
+    } else {
+      updatedItems.push(task)
+    }
+    this.desks[deskIndex] = { ...desk, items: updatedItems }
   }
 
   deleteTask(desk: IDesk, taskId: string) {
@@ -38,11 +46,11 @@ export default class DeskStore {
     this.desks[deskIndex] = { ...desk, items: desk.items.filter((it) => it.id !== taskId) }
   }
 
-  setCurrentDesk(desk: IDesk) {
+  setCurrentDesk(desk: IDesk | null) {
     this.currentDesk = desk
   }
 
-  setCurrentTask(task: ITask) {
+  setCurrentTask(task: ITask | null) {
     this.currentTask = task
   }
 }
