@@ -28,8 +28,14 @@ export default class DeskStore {
     makeAutoObservable(this)
   }
 
-  updateDesks(desks: Array<IDesk>) {
-    this.desks = desks
+  addTask(desk: IDesk, task: ITask) {
+    const deskIndex = this.desks.findIndex((it) => it.id === desk.id)
+    this.desks[deskIndex] = { ...desk, items: [...desk.items, task] }
+  }
+
+  deleteTask(desk: IDesk, taskId: string) {
+    const deskIndex = this.desks.findIndex((it) => it.id === desk.id)
+    this.desks[deskIndex] = { ...desk, items: desk.items.filter((it) => it.id !== taskId) }
   }
 
   setCurrentDesk(desk: IDesk) {

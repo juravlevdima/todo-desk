@@ -31,27 +31,14 @@ const DeskItem: FC<propTypes> = observer(({ task, desk }) => {
     e.currentTarget.style.boxShadow = 'none'
   }
 
-  const dropHandler = (e: DragEvent<HTMLDivElement>) => {
+  const dropHandler = (e: DragEvent<HTMLDivElement>, desk: IDesk ) => {
     e.preventDefault()
-    const currentIndex = deskStore.currentDesk?.items.findIndex((it) => it.id === deskStore.currentTask?.id)
+    e.currentTarget.style.boxShadow = 'none'
 
-    if (currentIndex) {
-      deskStore.currentDesk?.items.splice(currentIndex, 1)
+    if (deskStore.currentDesk && deskStore.currentTask && desk.id !== deskStore.currentDesk.id) {
+      deskStore.addTask(desk, deskStore.currentTask)
+      deskStore.deleteTask(deskStore.currentDesk, deskStore.currentTask.id)
     }
-
-    const dropIndex = desk?.items.findIndex((it) => it.id === deskStore.currentTask?.id)
-    if (dropIndex && deskStore.currentTask) {
-      deskStore.currentDesk?.items.splice(dropIndex + 1, 0, deskStore.currentTask)
-    }
-
-    deskStore.updateDesks(deskStore.desks.map((it) => {
-      if (it.id === desk.id) {
-        return desk
-      } else if (it.id === deskStore.currentDesk?.id) {
-        return deskStore.currentDesk
-      }
-      return it
-    }))
   }
 
   return (
@@ -61,8 +48,8 @@ const DeskItem: FC<propTypes> = observer(({ task, desk }) => {
       onDragStart={(e) => dragStartHandler(e, desk, task)}
       onDragEnd={(e) => dragEndHandler(e)}
       onDragLeave={(e) => dragLeaveHandler(e)}
-      onDragOver={(e) => dragOverHandler(e/* , desk, task */)}
-      onDrop={(e) => dropHandler(e)}
+      onDragOver={(e) => dragOverHandler(e)}
+      onDrop={(e) => dropHandler(e, desk)}
     >
       {task.title}
     </div>
