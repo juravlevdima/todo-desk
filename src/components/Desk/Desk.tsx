@@ -1,9 +1,11 @@
-import { FC, memo } from 'react'
+import { FC } from 'react'
+import { Reorder, useDragControls } from 'framer-motion'
 import { IDesk } from '../../types/desk.types'
 import DeskItem from './DeskItem'
 import { cardDragOverHandler, dropCardHandler } from './desk.handlers'
-import { Reorder, useDragControls } from 'framer-motion'
-import dragHandle from '../../images/drag-handle.svg'
+
+import styles from './Desk.module.scss'
+import DeskHeader from './DeskHeader'
 
 type propTypes = {
   desk: IDesk
@@ -19,30 +21,24 @@ const Desk: FC<propTypes> = ({ desk }) => {
       dragControls={controls}
       whileDrag={{
         scale: 1.1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        cursor: 'grabbing',
       }}
     >
       <div
-        className="border-2 border-black rounded-md py-5 px-5 w-96 h-full"
+        className="px-3 w-72 lg:w-80 xl:w-80"
         onDragOver={(e) => cardDragOverHandler(e)}
         onDrop={(e) => dropCardHandler(e, desk)}
       >
-        <div className="mb-3 text-center relative">
-          <span className="text-xl font-semibold">{desk.title}</span>
-          <img
-            className="absolute top-0 right-0 cursor-grab active:cursor-grabbing select-none"
-            onPointerDown={(e) => controls.start(e)}
-            draggable={false}
-            src={dragHandle}
-            alt="Handle"/>
-        </div>
-
-        <div>
-          {desk.items.map((task) => <DeskItem key={task.id} task={task} desk={desk}/>)}
+        <div className={`p-5 border-2 border-black rounded-md ${styles.desk}`} >
+          <DeskHeader title={desk.title} controls={controls} />
+          <div>
+            {desk.items.map((task) => <DeskItem key={task.id} task={task} desk={desk}/>)}
+          </div>
         </div>
       </div>
     </Reorder.Item>
   )
 }
 
-export default memo(Desk)
+export default Desk

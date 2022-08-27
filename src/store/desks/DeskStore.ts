@@ -22,7 +22,8 @@ export default class DeskStore {
         { title: '6 task', id: nanoid(6) },
         { title: '7 task', id: nanoid(6) },
       ]
-    }
+    },
+    { id: nanoid(6), title: '4 desk', items: [{ title: '4 d task', id: nanoid(6) }] },
   ]
 
   constructor() {
