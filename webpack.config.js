@@ -75,7 +75,7 @@ function configurePlugins() {
 module.exports = {
   mode: isProd ? "production" : "development",
   devServer: {
-    port: 3000,
+    port: process.env.PORT || 3000,
     hot: true,
   },
   devtool: isProd ? false : "source-map",
