@@ -87,9 +87,16 @@ module.exports = {
     path: path.resolve(__dirname, "./build"),
     filename: isProd ? "assets/js/[name].[contenthash].js" : "[name].js",
   },
+  performance: {
+    hints: isProd ? "warning" : false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  },
   optimization: {
     splitChunks: {
       chunks: "all",
+      minSize: 10000,
+      maxSize: 512000
     },
   },
   module: {

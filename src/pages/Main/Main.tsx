@@ -4,13 +4,13 @@ import Desk from '../../components/Desk/Desk'
 import { observer } from 'mobx-react-lite'
 
 const Main: FC = observer(() => {
-  const { deskStore } = useStores()
+  const { deskStore: { desks }} = useStores()
 
   return (
     <div className="container">
       <div className="flex justify-between">
         {
-          deskStore.desks.map((desk) => <Desk key={desk.id} desk={desk}/>)
+          desks.map((desk) => <Desk key={desk.id} desk={desk}/>)
         }
       </div>
     </div>

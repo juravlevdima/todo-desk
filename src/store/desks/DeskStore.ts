@@ -3,6 +3,8 @@ import { IDesk, ITask } from '../../types/desk.types'
 import { nanoid } from 'nanoid'
 
 export default class DeskStore {
+  currentDesk: null | IDesk = null
+  currentTask: null | ITask = null
   desks: Array<IDesk> = [
     { id: nanoid(6), title: 'first desk', items: [{ title: 'first task', id: nanoid(6) }] },
     {
@@ -22,9 +24,6 @@ export default class DeskStore {
       ]
     }
   ]
-
-  currentDesk: null | IDesk = null
-  currentTask: null | ITask = null
 
   constructor() {
     makeAutoObservable(this)
