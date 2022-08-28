@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { IDesk, ITask } from '../../types/desk.types'
+import { IDesk, ITask, TaskLabelsT } from '../../types/desk.types'
 import { nanoid } from 'nanoid'
 
 export default class DeskStore {
@@ -43,6 +43,22 @@ export default class DeskStore {
       updatedItems.push(task)
     }
     this.desks[deskIndex] = { ...desk, items: updatedItems }
+  }
+
+  createTask(desk: IDesk, title: string, description:string, labels: TaskLabelsT, expirationDate?: Date) {
+    const task: ITask = {
+      id: nanoid(6),
+      title,
+      description,
+      labels,
+      inProgress: false,
+      isCompleted: false,
+      attached: false,
+      createdDate: new Date(),
+      expirationDate: expirationDate || null
+    }
+
+    this.addTask(desk, task)
   }
 
   deleteTask(desk: IDesk, taskId: string) {

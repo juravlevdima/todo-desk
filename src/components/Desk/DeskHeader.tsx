@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 import dragHandle from '../../images/drag-handle.svg'
 import addItemIcon from '../../images/add-item.svg'
 import { AnimatePresence, DragControls } from 'framer-motion'
-import AddTaskModal from '../Modals/AddTaskModal'
+import AddTaskModal from '../Modals/AddTaskModal/AddTaskModal'
 import { IDesk } from '../../types/desk.types'
 
 type propTypes = {

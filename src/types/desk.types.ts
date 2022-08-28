@@ -1,13 +1,15 @@
+export type TaskLabelsT = 'Важно' | 'Срочно' | 'Обычный'
+
 export interface ITask {
   id: string
   title: string
   description?: string
-  labels?: 'Важно' | 'Срочно' | 'День рождения' | 'Обычный'
+  labels?: TaskLabelsT
   inProgress?: boolean
   isCompleted?: boolean
   attached?: boolean
   createdDate?: Date
-  expirationDate?: Date
+  expirationDate?: Date | null
 }
 
 export interface IDesk {
