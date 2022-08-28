@@ -31,7 +31,7 @@ const Desk: FC<propTypes> = ({ desk }) => {
         onDrop={(e) => dropCardHandler(e, desk)}
       >
         <div className={`p-5 border-2 border-black rounded-md ${styles.desk}`} >
-          <DeskHeader title={desk.title} controls={controls} />
+          <DeskHeader desk={desk} controls={controls} />
           <div>
             {desk.items.map((task) => <DeskItem key={task.id} task={task} desk={desk}/>)}
           </div>

@@ -1,14 +1,18 @@
-import { FC, memo } from 'react'
+import { FC, useState } from 'react'
 import dragHandle from '../../images/drag-handle.svg'
 import addItemIcon from '../../images/add-item.svg'
-import { DragControls } from 'framer-motion'
+import { AnimatePresence, DragControls } from 'framer-motion'
+import AddTaskModal from '../Modals/AddTaskModal'
+import { IDesk } from '../../types/desk.types'
 
 type propTypes = {
-  title: string
+  desk: IDesk
   controls: DragControls
 }
 
-const DeskHeader: FC<propTypes> = ({ title, controls }) => {
+const DeskHeader: FC<propTypes> = ({ desk, controls }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
     <div className="mb-3 flex justify-between">
       <img
@@ -20,10 +24,11 @@ const DeskHeader: FC<propTypes> = ({ title, controls }) => {
         title="Передвинуть"
       />
 
-      <span className="text-xl font-semibold">{title}</span>
+      <span className="text-xl font-semibold">{desk.title}</span>
 
       <button
         className="hover:scale-125 transition duration-300 active:transition-none active:scale-100"
+        onClick={() => setIsModalOpen(true)}
       >
         <img
           width="20px"
@@ -32,8 +37,12 @@ const DeskHeader: FC<propTypes> = ({ title, controls }) => {
           title="Добавить"
         />
       </button>
+
+      <AnimatePresence>
+        {isModalOpen && <AddTaskModal setIsModalOpen={setIsModalOpen} desk={desk} />}
+      </AnimatePresence>
     </div>
   )
 }
 
-export default memo(DeskHeader)
+export default DeskHeader
