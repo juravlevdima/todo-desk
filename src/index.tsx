@@ -5,6 +5,7 @@ import App from './App'
 
 import './style/tailwind.css'
 import './style/style.scss'
+import ThemeProvider from './components/Providers/ThemeProvider'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,8 +13,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App/>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>
 )
