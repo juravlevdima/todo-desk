@@ -1,4 +1,3 @@
-
 * {
   padding: 0;
   margin: 0;
@@ -13,4 +12,9 @@
 
 .dark-theme {
   @apply dark:text-white transition-bg-color duration-500;
+}
+
+.input-field {
+  @apply px-5  border border-gray-200 rounded shadow-sm text-sm
+    focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none dark:bg-dark-3;
 }

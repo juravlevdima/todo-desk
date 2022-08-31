@@ -18,7 +18,7 @@ const DeskItem: FC<propTypes> = ({ task, desk }) => {
       onDragLeave={(e) => dragLeaveHandler(e)}
     >
       <div
-        className={`${styles.draggable} px-8 border border-gray-600 cursor-grab active:cursor-grabbing`}
+        className={`${styles.draggable} px-8 border border-gray-600 break-words cursor-grab active:cursor-grabbing`}
         draggable={true}
         onDragStart={(e) => dragStartHandler(e, desk, task)}
         onDragEnd={(e) => dragEndHandler(e)}

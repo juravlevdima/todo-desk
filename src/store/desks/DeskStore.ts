@@ -45,12 +45,12 @@ export default class DeskStore {
     this.desks[deskIndex] = { ...desk, items: updatedItems }
   }
 
-  createTask(desk: IDesk, title: string, description:string, labels: TaskLabelsT, expirationDate?: Date) {
+  createTask(desk: IDesk, title: string, description: string, label: TaskLabelsT, expirationDate?: Date) {
     const task: ITask = {
       id: nanoid(6),
       title,
       description,
-      labels,
+      label,
       inProgress: false,
       isCompleted: false,
       attached: false,

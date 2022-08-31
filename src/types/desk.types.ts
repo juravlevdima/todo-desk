@@ -4,7 +4,7 @@ export interface ITask {
   id: string
   title: string
   description?: string
-  labels?: TaskLabelsT
+  label?: TaskLabelsT
   inProgress?: boolean
   isCompleted?: boolean
   attached?: boolean

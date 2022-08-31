@@ -1,17 +1,19 @@
-import { FC } from 'react'
+import { FC, useId } from 'react'
 import ModalInput from '../common/ModalInput'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { useStores } from '../../../hooks/useStores'
 import { addTaskModalPropsT } from './AddTaskModal'
+import RadioButton from '../../common/RadioButton'
 
 
 const AddTaskModalForm: FC<addTaskModalPropsT> = ({ desk, setIsModalOpen }) => {
   const { register, handleSubmit } = useForm<FieldValues>()
   const { deskStore } = useStores()
+  const dateInputId = useId()
 
   const addTask: SubmitHandler<FieldValues> = (d) => {
     setIsModalOpen(false)
-    deskStore.createTask(desk, d.title, '', 'Обычный')
+    deskStore.createTask(desk, d.title, d.description, d.label, d.expirationDate)
   }
 
 
@@ -21,9 +23,24 @@ const AddTaskModalForm: FC<addTaskModalPropsT> = ({ desk, setIsModalOpen }) => {
         <ModalInput register={register} text="Заголовок" name="title" autoFocus={true} />
         <textarea
           placeholder="Введите описание..."
-          className="px-5 py-2 mb-5 border border-gray-200 rounded shadow-sm h-20 text-sm
-              focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none dark:bg-dark-3"
+          className="input-field py-2 mb-5 h-20"
+          {...register('description')}
         />
+        <div className="mb-5 flex items-center justify-between">
+          <label className="font-semibold text-sm mr-6 whitespace-nowrap" htmlFor={dateInputId}>Дата завершения</label>
+          <input
+            type="date"
+            id={dateInputId}
+            className="input-field py-1 w-full"
+            {...register('expirationDate')}
+          />
+        </div>
+        <div className="flex items-center">
+          <div className="font-semibold text-sm mr-10">Метка:</div>
+          <RadioButton name="label" text="Обычный" register={register} defaultChecked={true}/>
+          <RadioButton name="label" text="Важно" register={register}/>
+          <RadioButton name="label" text="Срочно" register={register}/>
+        </div>
       </div>
 
       <div
