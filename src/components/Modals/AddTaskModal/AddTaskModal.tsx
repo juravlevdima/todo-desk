@@ -1,7 +1,7 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 import { motion } from 'framer-motion'
 import { IDesk } from '../../../types/desk.types'
-import ModalHeader from '../ModalHeader'
+import ModalHeader from '../common/ModalHeader'
 import AddTaskModalForm from './AddTaskModalForm'
 
 export type addTaskModalPropsT = {
@@ -23,7 +23,7 @@ const AddTaskModal: FC<addTaskModalPropsT> = ({ setIsModalOpen, desk }) => {
         initial={{ opacity: 0, y: 0, x: '-50%' }}
         animate={{ opacity: 1, y: '-50%', x: '-50%' }}
         exit={{ opacity: 0 }}
-        className="absolute top-1/2 left-1/2 z-50 bg-white flex flex-col rounded-lg border border-gray-300
+        className="absolute top-1/2 left-1/2 z-50 flex flex-col rounded-lg
           shadow-xl w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl"
       >
         <ModalHeader setIsModalOpen={setIsModalOpen} title="Добавить задачу" />

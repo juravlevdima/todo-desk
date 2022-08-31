@@ -1,9 +1,10 @@
-import { FC, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 import dragHandle from '../../images/drag-handle.svg'
-import addItemIcon from '../../images/add-item.svg'
 import { AnimatePresence, DragControls } from 'framer-motion'
 import AddTaskModal from '../Modals/AddTaskModal/AddTaskModal'
 import { IDesk } from '../../types/desk.types'
+import AddIcon from '../common/AddIcon'
+import { IThemeContext, ThemeContext } from '../Providers/ThemeProvider'
 
 type propTypes = {
   desk: IDesk
@@ -11,6 +12,7 @@ type propTypes = {
 }
 
 const DeskHeader: FC<propTypes> = ({ desk, controls }) => {
+  const { theme } = useContext(ThemeContext) as IThemeContext
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
@@ -29,17 +31,13 @@ const DeskHeader: FC<propTypes> = ({ desk, controls }) => {
       <button
         className="hover:scale-125 transition duration-300 active:transition-none active:scale-100"
         onClick={() => setIsModalOpen(true)}
+        title="Добавить"
       >
-        <img
-          width="20px"
-          src={addItemIcon}
-          alt="Add"
-          title="Добавить"
-        />
+        <AddIcon fill={theme === 'light' ? '#000' : '#fff'}/>
       </button>
 
       <AnimatePresence>
-        {isModalOpen && <AddTaskModal setIsModalOpen={setIsModalOpen} desk={desk} />}
+        {isModalOpen && <AddTaskModal setIsModalOpen={setIsModalOpen} desk={desk}/>}
       </AnimatePresence>
     </div>
   )

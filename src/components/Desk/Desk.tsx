@@ -21,16 +21,15 @@ const Desk: FC<propTypes> = ({ desk }) => {
       dragControls={controls}
       whileDrag={{
         scale: 1.1,
-        backgroundColor: 'white',
         cursor: 'grabbing',
       }}
     >
       <div
-        className="px-3 w-72 lg:w-80 xl:w-80 dark:text-white"
+        className="px-3 w-72 lg:w-80 xl:w-80"
         onDragOver={(e) => cardDragOverHandler(e)}
         onDrop={(e) => dropCardHandler(e, desk)}
       >
-        <div className={`p-5 border-2 border-black rounded-md ${styles.desk}`} >
+        <div className={`p-5 rounded-md shadow-lg bg-white dark-theme dark:bg-dark-3 ${styles.desk}`} >
           <DeskHeader desk={desk} controls={controls} />
           <div>
             {desk.items.map((task) => <DeskItem key={task.id} task={task} desk={desk}/>)}

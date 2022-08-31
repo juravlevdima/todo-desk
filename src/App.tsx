@@ -10,7 +10,7 @@ const App: FC = () => {
   return (
     <div id="app" className={theme}>
       <Header/>
-      <main className="flex-1 bg-white dark:bg-dark-2 transition-colors duration-500">
+      <main className="flex-1 bg-gray-100 dark-theme dark:bg-dark-2">
         <AppRoutes/>
       </main>
       <Footer/>

@@ -13,7 +13,10 @@ module.exports = {
         'dark-1': 'rgba(23, 23, 23, 1)',
         'dark-2': 'rgba(32, 33, 36, 1)',
         'dark-3': 'rgba(48, 49, 52, 1)',
-      }
+      },
+      transitionProperty: {
+        'bg-color': 'background-color',
+      },
     },
   },
   plugins: [],
