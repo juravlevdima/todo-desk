@@ -9,7 +9,7 @@ export interface ITask {
   isCompleted?: boolean
   attached?: boolean
   createdDate?: Date
-  expirationDate?: Date | null
+  expirationDate?: string | null
 }
 
 export interface IDesk {

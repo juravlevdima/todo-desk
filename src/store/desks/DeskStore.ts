@@ -6,7 +6,13 @@ export default class DeskStore {
   currentDesk: null | IDesk = null
   currentTask: null | ITask = null
   desks: Array<IDesk> = [
-    { id: nanoid(6), title: 'first desk', items: [{ title: 'first task', id: nanoid(6), description: 'описание таска qwerty' }] },
+    { id: nanoid(6), title: 'first desk',
+      items: [
+        { title: 'first task', id: nanoid(6), description: 'описание таска qwerty', label: 'Срочно' },
+        { title: 'второй', id: nanoid(6), description: 'йцуке фывап ячсми', label: 'Важно' },
+        { title: 'Просроченный', id: nanoid(6), description: 'qwrty adfg zxcvb ghlwqwe', expirationDate: '2022-08-11' },
+      ]
+    },
     {
       id: nanoid(6),
       title: 'second desk',
@@ -45,7 +51,7 @@ export default class DeskStore {
     this.desks[deskIndex] = { ...desk, items: updatedItems }
   }
 
-  createTask(desk: IDesk, title: string, description: string, label: TaskLabelsT, expirationDate?: Date) {
+  createTask(desk: IDesk, title: string, description: string, label: TaskLabelsT, expirationDate?: string) {
     const task: ITask = {
       id: nanoid(6),
       title,
