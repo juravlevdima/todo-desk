@@ -8,10 +8,11 @@ const Main: FC = observer(() => {
   const { deskStore } = useStores()
 
   return (
-    <div className="px-2 pt-3 md:px-6 lg:px-8 xl:px-10 2xl:px-12">
+    <div className="px-2 pt-5 md:px-6 lg:px-8 xl:px-10 2xl:px-12 overflow-x-auto">
       <Reorder.Group
         onReorder={deskStore.updateDesks.bind(deskStore)}
-        values={deskStore.desks} axis="x"
+        values={deskStore.desks}
+        axis="x"
         className="flex"
       >
         {deskStore.desks.map((desk) => (

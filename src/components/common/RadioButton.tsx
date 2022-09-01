@@ -12,7 +12,7 @@ const RadioButton: FC<propTypes> = ({ text, name, register, defaultChecked = fal
   const btnId = useId()
 
   return (
-    <>
+    <div className="mr-5">
       <input
         id={btnId}
         type="radio"
@@ -21,10 +21,10 @@ const RadioButton: FC<propTypes> = ({ text, name, register, defaultChecked = fal
         {...register(name)}
         defaultChecked={defaultChecked}
       />
-      <label htmlFor={btnId} className="cursor-pointer text-sm mr-5 last:mr-0">
+      <label htmlFor={btnId} className="cursor-pointer text-sm last:mr-0">
         {text}
       </label>
-    </>
+    </div>
   )
 }
 

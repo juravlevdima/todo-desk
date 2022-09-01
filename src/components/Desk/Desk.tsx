@@ -13,14 +13,13 @@ type propTypes = {
 
 const Desk: FC<propTypes> = ({ desk }) => {
   const controls = useDragControls()
-
   return (
     <Reorder.Item
       value={desk}
       dragListener={false}
       dragControls={controls}
       whileDrag={{
-        scale: 1.1,
+        scale: 1.05,
         cursor: 'grabbing',
       }}
     >

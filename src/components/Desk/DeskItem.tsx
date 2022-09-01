@@ -12,18 +12,20 @@ type propTypes = {
 const DeskItem: FC<propTypes> = ({ task, desk }) => {
   return (
     <div
-      className="task text-center pb-2 pt-1"
+      className="task pb-2 pt-1"
       onDrop={(e) => dropHandler(e, desk, task)}
       onDragOver={(e) => dragOverHandler(e)}
       onDragLeave={(e) => dragLeaveHandler(e)}
     >
       <div
-        className={`${styles.draggable} px-8 border border-gray-600 break-words cursor-grab active:cursor-grabbing`}
+        className={`${styles.draggable} px-6 py-1 break-words bg-zinc-100 rounded-md
+          cursor-grab active:cursor-grabbing dark-theme dark:bg-dark-4`}
         draggable={true}
         onDragStart={(e) => dragStartHandler(e, desk, task)}
         onDragEnd={(e) => dragEndHandler(e)}
       >
-        {task.title}
+        <div className={`pb-1 font-semibold ${task.description && 'border-b border-gray-400'}`}>{task.title}</div>
+        <div className="pl-2 py-1 font-light text-sm">{task.description}</div>
       </div>
     </div>
   )

@@ -6,7 +6,7 @@ export default class DeskStore {
   currentDesk: null | IDesk = null
   currentTask: null | ITask = null
   desks: Array<IDesk> = [
-    { id: nanoid(6), title: 'first desk', items: [{ title: 'first task', id: nanoid(6) }] },
+    { id: nanoid(6), title: 'first desk', items: [{ title: 'first task', id: nanoid(6), description: 'описание таска qwerty' }] },
     {
       id: nanoid(6),
       title: 'second desk',

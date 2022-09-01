@@ -22,8 +22,9 @@ const AddTaskModalForm: FC<addTaskModalPropsT> = ({ desk, setIsModalOpen }) => {
       <div className="flex flex-col px-6 py-4 bg-gray-50 dark-theme dark:bg-dark-2">
         <ModalInput register={register} text="Заголовок" name="title" autoFocus={true} />
         <textarea
-          placeholder="Введите описание..."
+          placeholder="Введите описание... (Максимум 300 символов)"
           className="input-field py-2 mb-5 h-20"
+          maxLength={300}
           {...register('description')}
         />
         <div className="mb-5 flex items-center justify-between">
@@ -35,7 +36,7 @@ const AddTaskModalForm: FC<addTaskModalPropsT> = ({ desk, setIsModalOpen }) => {
             {...register('expirationDate')}
           />
         </div>
-        <div className="flex items-center">
+        <div className="flex flex-wrap items-center">
           <div className="font-semibold text-sm mr-10">Метка:</div>
           <RadioButton name="label" text="Обычный" register={register} defaultChecked={true}/>
           <RadioButton name="label" text="Важно" register={register}/>

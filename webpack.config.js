@@ -75,6 +75,7 @@ function configurePlugins() {
 module.exports = {
   mode: isProd ? "production" : "development",
   devServer: {
+    historyApiFallback: true,
     port: process.env.PORT || 3000,
     hot: true,
   },
