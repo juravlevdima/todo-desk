@@ -28,7 +28,7 @@ const DeskItem: FC<propTypes> = ({ task, desk }) => {
       <div
         className={`${styles.draggable} px-6 pt-1 pb-3 break-words bg-zinc-100 rounded-md
           cursor-grab active:cursor-grabbing dark-theme dark:bg-dark-4`}
-        draggable={true}
+        draggable={!task.attached}
         onDragStart={(e) => dragStartHandler(e, desk, task)}
         onDragEnd={(e) => dragEndHandler(e)}
       >
