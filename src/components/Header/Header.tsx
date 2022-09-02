@@ -1,5 +1,6 @@
 import { FC, memo, useContext } from 'react'
-import { IThemeContext, ThemeContext } from '../Providers/ThemeProvider'
+import { IThemeContext } from '../../types/theme.types'
+import { ThemeContext } from '../Providers/ThemeProvider'
 
 const Header: FC = () => {
   const { theme, toggleTheme } = useContext(ThemeContext) as IThemeContext

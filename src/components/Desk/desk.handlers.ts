@@ -20,15 +20,11 @@ export const cardDragOverHandler = (e: DragEvent<HTMLDivElement>) => {
   e.preventDefault()
 }
 
-export const dragOverHandler = (e: DragEvent<HTMLDivElement>) => {
+export const dragOverHandler = (e: DragEvent<HTMLDivElement>, pin: boolean) => {
   e.preventDefault()
-  if (e.currentTarget.classList.contains('task')) {
+  if (e.currentTarget.classList.contains('task') && !pin) {
     e.currentTarget.classList.add(styles.drop)
   }
-}
-
-export const dragLeaveHandler = (e: DragEvent<HTMLDivElement>) => {
-  e.currentTarget.classList.remove(styles.drop)
 }
 
 export const dragStartHandler = (e: DragEvent<HTMLDivElement>, desk: IDesk, task: ITask) => {
@@ -40,8 +36,10 @@ export const dragEndHandler = (e: DragEvent<HTMLDivElement>) => {
   e.currentTarget.classList.remove(styles.drop)
 }
 
-export const dropHandler = (e: DragEvent<HTMLDivElement>, desk: IDesk, task: ITask ) => {
+export const dropHandler = (e: DragEvent<HTMLDivElement>, desk: IDesk, task: ITask, pin: boolean ) => {
   e.preventDefault()
+  if (pin) return
+
   e.stopPropagation()
   e.currentTarget.classList.remove(styles.drop)
 

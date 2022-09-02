@@ -1,5 +1,5 @@
 import { autorun, makeAutoObservable } from 'mobx'
-import { IDesk, ITask, TaskLabelsT } from '../../types/desk.types'
+import { IDesk, ITask, IUpdateTask, TaskLabelsT } from '../../types/desk.types'
 import { nanoid } from 'nanoid'
 import { deskStoreInitialState } from './DeskStore.initial'
 
@@ -56,6 +56,18 @@ export default class DeskStore {
   deleteTask(desk: IDesk, taskId: string) {
     const deskIndex = this.desks.findIndex((it) => it.id === desk.id)
     this.desks[deskIndex] = { ...desk, items: desk.items.filter((it) => it.id !== taskId) }
+    this.saveDesksToLS()
+  }
+
+  updateTask(taskId: string, desk: IDesk, newData: IUpdateTask) {
+    const deskIndex = this.desks.findIndex((it) => it.id === desk.id)
+    this.desks[deskIndex] = {
+      ...desk, items: desk.items.map((task) => {
+        return task.id === taskId
+          ? { ...task, ...newData }
+          : task
+      })
+    }
     this.saveDesksToLS()
   }
 

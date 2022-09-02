@@ -4,7 +4,8 @@ import { AnimatePresence, DragControls } from 'framer-motion'
 import AddTaskModal from '../Modals/AddTaskModal/AddTaskModal'
 import { IDesk } from '../../types/desk.types'
 import AddIcon from '../common/AddIcon'
-import { IThemeContext, ThemeContext } from '../Providers/ThemeProvider'
+import { ThemeContext } from '../Providers/ThemeProvider'
+import { IThemeContext } from '../../types/theme.types'
 
 type propTypes = {
   desk: IDesk

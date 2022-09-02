@@ -7,7 +7,7 @@ export interface ITask {
   label?: TaskLabelsT
   inProgress?: boolean
   isCompleted?: boolean
-  pinned?: boolean
+  pinned: boolean
   createdDate?: Date
   expirationDate?: string | null
 }
@@ -17,4 +17,14 @@ export interface IDesk {
   title: string
   items: Array<ITask>
   isHidden?: boolean
+}
+
+export interface IUpdateTask {
+  title?: string
+  description?: string
+  label?: TaskLabelsT
+  inProgress?: boolean
+  isCompleted?: boolean
+  pinned?: boolean
+  expirationDate?: string | null
 }

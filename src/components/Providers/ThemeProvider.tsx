@@ -1,11 +1,5 @@
 import { createContext, FC, PropsWithChildren, useState } from 'react'
-
-type ThemeT = 'light' | 'dark'
-
-export interface IThemeContext {
-  toggleTheme: (theme: ThemeT) => void
-  theme: ThemeT
-}
+import { IThemeContext, ThemeT } from '../../types/theme.types'
 
 const getThemeFromLS = (): ThemeT => {
   const theme = localStorage.getItem('theme')
