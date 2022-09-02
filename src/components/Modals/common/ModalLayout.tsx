@@ -1,14 +1,14 @@
-import { Dispatch, FC, SetStateAction } from 'react'
+import { Dispatch, FC, SetStateAction, ReactNode } from 'react'
 import { motion } from 'framer-motion'
-import ModalHeader from '../common/ModalHeader'
+import ModalHeader from './ModalHeader'
 
 type propTypes = {
-  text: string,
-  setIsModalOpen: Dispatch<SetStateAction<boolean>>,
-  confirmFunc: () => void
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>
+  children: ReactNode
+  title: string
 }
 
-const Confirmation: FC<propTypes> = ({ text, setIsModalOpen, confirmFunc }) => {
+const ModalLayout: FC<propTypes> = ({ setIsModalOpen, title, children }) => {
   return (
     <>
       <motion.div
@@ -25,10 +25,11 @@ const Confirmation: FC<propTypes> = ({ text, setIsModalOpen, confirmFunc }) => {
         className="absolute top-1/2 left-1/2 z-50 flex flex-col rounded-lg
           shadow-xl w-11/12 sm:w-5/6 lg:w-1/2 max-w-2xl"
       >
-        <ModalHeader setIsModalOpen={setIsModalOpen} title={text} />
+        <ModalHeader title={title} setIsModalOpen={setIsModalOpen} />
+        {children}
       </motion.div>
     </>
   )
 }
 
-export default Confirmation
+export default ModalLayout

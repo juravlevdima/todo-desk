@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 type propTypes = {
   fill: string
@@ -13,4 +13,4 @@ const AddIcon: FC<propTypes> = ({ fill }) => {
   )
 }
 
-export default AddIcon
+export default memo(AddIcon)
