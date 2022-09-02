@@ -18,3 +18,24 @@
   @apply px-5  border border-gray-200 rounded shadow-sm text-sm
     focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none dark:bg-dark-3;
 }
+
+
+
+.pin {
+  cursor: pointer;
+  appearance: none;
+  opacity: .2;
+  &:hover { opacity: 1; }
+  &::before { content: url("../images/pin-icon.svg"); }
+  &:checked {
+    opacity: 1;
+    &::before { filter: brightness(0) invert(72%) sepia(78%) saturate(2554%) hue-rotate(88deg) contrast(75%); }
+  }
+}
+
+.light .pin {
+  &::before { filter: invert(100%); }
+  &:hover {opacity: .6; }
+  &:hover:checked {opacity: 1; }
+}
+

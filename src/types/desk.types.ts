@@ -7,7 +7,7 @@ export interface ITask {
   label?: TaskLabelsT
   inProgress?: boolean
   isCompleted?: boolean
-  attached?: boolean
+  pinned?: boolean
   createdDate?: Date
   expirationDate?: string | null
 }

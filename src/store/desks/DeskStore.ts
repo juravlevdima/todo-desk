@@ -45,7 +45,7 @@ export default class DeskStore {
       label,
       inProgress: false,
       isCompleted: false,
-      attached: false,
+      pinned: false,
       createdDate: new Date(),
       expirationDate: expirationDate || null
     }

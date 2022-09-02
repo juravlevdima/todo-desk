@@ -19,8 +19,9 @@ const DeskItem: FC<propTypes> = ({ task, desk }) => {
     : false
 
   return (
+
     <div
-      className="task pb-2 pt-1"
+      className="task pb-2 pt-1 relative"
       onDrop={(e) => dropHandler(e, desk, task)}
       onDragOver={(e) => dragOverHandler(e)}
       onDragLeave={(e) => dragLeaveHandler(e)}
@@ -28,7 +29,7 @@ const DeskItem: FC<propTypes> = ({ task, desk }) => {
       <div
         className={`${styles.draggable} px-6 pt-1 pb-3 break-words bg-zinc-100 rounded-md
           cursor-grab active:cursor-grabbing dark-theme dark:bg-dark-4`}
-        draggable={!task.attached}
+        draggable={!task.pinned}
         onDragStart={(e) => dragStartHandler(e, desk, task)}
         onDragEnd={(e) => dragEndHandler(e)}
       >
@@ -37,6 +38,10 @@ const DeskItem: FC<propTypes> = ({ task, desk }) => {
         {task.label === 'Срочно' && <DeskItemLabel icon={urgentIcon} text={task.label} className="bg-orange-500"/>}
         {task.label === 'Важно' && <DeskItemLabel icon={warningIcon} text={task.label} className="bg-red-500"/>}
         {isOverdue && <DeskItemLabel icon={overdueIcon} text="Просрочен" className="bg-blue-500"/>}
+      </div>
+
+      <div className="absolute top-2 right-1">
+        <input type="checkbox" defaultChecked={task.pinned} className="pin"/>
       </div>
     </div>
   )

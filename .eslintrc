@@ -10,7 +10,7 @@
   ],
   "rules": {
     "arrow-parens": "warn",
-    "no-console": "warn",
+    "no-console": "off",
     "no-debugger": "warn",
     "indent": ["warn", 2],
     "comma-dangle": ["warn", "only-multiline"],
@@ -40,6 +40,7 @@
     "quotes": ["warn", "single"],
     "jsx-quotes": ["warn", "prefer-double"],
     "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
     "react/no-array-index-key": "warn",
     "react/jsx-key": "warn",
     "eol-last": ["warn", "always"],

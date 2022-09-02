@@ -14,7 +14,6 @@ function configureCss(modules = false, sass = false) {
     {
       loader: "css-loader",
       options: {
-        importLoaders: 1,
         modules: modules,
         sourceMap: !isProd,
       },
@@ -142,17 +141,24 @@ module.exports = {
         exclude: /node_modules/,
         use: configureCss(true),
       },
+      // {
+      //   test: /\.(png|jpe?g|gif|svg|webp)$/i,
+      //   use: [
+      //     {
+      //       loader: "file-loader",
+      //       options: {
+      //         name: isProd ? '[name].[contenthash].[ext]' : '[name].[ext]',
+      //         outputPath: 'assets/images'
+      //       },
+      //     },
+      //   ],
+      // },
       {
         test: /\.(png|jpe?g|gif|svg|webp)$/i,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: isProd ? '[name].[contenthash].[ext]' : '[name].[ext]',
-              outputPath: 'assets/images'
-            },
-          },
-        ],
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/images/[name][ext]'
+        }
       },
       {
         test: /\.([ot]tf|woff2?|eot)$/i,
