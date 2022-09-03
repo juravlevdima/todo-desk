@@ -25,10 +25,10 @@ export const baseDesks: Array<IDesk> = [
   },
   {
     id: nanoid(6),
-    title: 'Дополнительно',
+    title: 'Двойной клик',
     items: [
+      { title: 'Переименовать стол', description: 'Можно кликнув дважды на заголовок', id: nanoid(6), pinned: true },
       { title: 'Можно закрепить задачу', id: nanoid(6), pinned: true },
-      { title: 'Изучить JS', id: nanoid(6), pinned: true }
     ]
   },
 ]

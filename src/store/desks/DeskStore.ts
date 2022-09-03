@@ -38,6 +38,7 @@ export default class DeskStore {
 
   updateDeskData(id: string, data: IUpdateDesk) {
     this.desks = this.desks.map((desk) => desk.id === id ? { ...desk, ...data } : desk)
+    this.saveDesksToLS()
   }
 
   addTask(desk: IDesk, task: ITask, idx?: number) {
