@@ -15,6 +15,7 @@ type propTypes = {
 const DeskHeader: FC<propTypes> = ({ desk, controls }) => {
   const { theme } = useContext(ThemeContext) as IThemeContext
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isRename, setIsRename] = useState(false)
 
   return (
     <div className="mb-3 flex justify-between">
@@ -27,7 +28,14 @@ const DeskHeader: FC<propTypes> = ({ desk, controls }) => {
         title="Передвинуть"
       />
 
-      <span className="text-xl font-semibold">{desk.title}</span>
+      <div className="text-lg font-semibold text-center px-3">
+        {isRename
+          ? <input autoFocus className="bg-transparent text-center w-40" type="text" defaultValue={desk.title}/>
+          : <span onDoubleClick={() => setIsRename(true)}>
+            {desk.title}
+          </span>
+        }
+      </div>
 
       <button
         className="hover:scale-125 transition duration-300 active:transition-none active:scale-100"

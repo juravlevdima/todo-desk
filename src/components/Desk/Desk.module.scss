@@ -1,5 +1,6 @@
 .desk {
-  min-height: calc(100vh - 140px);
+  height: calc(100vh - 110px);
+  overflow: auto;
 }
 
 .drop {

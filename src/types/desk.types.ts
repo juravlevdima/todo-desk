@@ -28,3 +28,8 @@ export interface IUpdateTask {
   pinned?: boolean
   expirationDate?: string | null
 }
+
+export interface IUpdateDesk {
+  title?: string
+  isHidden?: boolean
+}

@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, ReactNode } from 'react'
+import { Dispatch, FC, SetStateAction, ReactNode, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import ModalHeader from './ModalHeader'
 
@@ -9,6 +9,13 @@ type propTypes = {
 }
 
 const ModalLayout: FC<propTypes> = ({ setIsModalOpen, title, children }) => {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [])
+
   return (
     <>
       <motion.div

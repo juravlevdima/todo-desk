@@ -24,7 +24,7 @@ const Desk: FC<propTypes> = ({ desk }) => {
       }}
     >
       <div
-        className="px-3 w-72 lg:w-80 xl:w-80"
+        className="px-3 w-72 lg:w-80"
         onDragOver={(e) => cardDragOverHandler(e)}
         onDrop={(e) => dropCardHandler(e, desk)}
       >

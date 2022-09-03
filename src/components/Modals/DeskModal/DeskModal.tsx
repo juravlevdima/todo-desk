@@ -1,7 +1,8 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 import ModalLayout from '../common/ModalLayout'
-import { FieldValues, useForm } from 'react-hook-form'
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import ModalInput from '../common/ModalInput'
+import { useStores } from '../../../hooks/useStores'
 
 type propTypes = {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
@@ -10,8 +11,10 @@ type propTypes = {
 
 const DeskModal: FC<propTypes> = ({ setIsModalOpen }) => {
   const { register, handleSubmit } = useForm<FieldValues>()
+  const { deskStore } = useStores()
 
-  const createDesk = () => {
+  const createDesk: SubmitHandler<FieldValues> = (d) => {
+    deskStore.createDesk(d.title)
     setIsModalOpen(false)
   }
 
@@ -19,7 +22,7 @@ const DeskModal: FC<propTypes> = ({ setIsModalOpen }) => {
     <ModalLayout setIsModalOpen={setIsModalOpen} title="Создать новый стол">
       <form onSubmit={handleSubmit(createDesk)}>
         <div className="bg-gray-50 px-6 py-4 dark-theme dark:bg-dark-2">
-          <ModalInput register={register} text="Название" name="title" autoFocus={true} />
+          <ModalInput register={register} text="Название" name="title" autoFocus={true}/>
         </div>
         <div
           className="flex items-center justify-end px-5 py-3 bg-white border-t border-gray-200 rounded-b-lg

@@ -1,5 +1,5 @@
 import { autorun, makeAutoObservable } from 'mobx'
-import { IDesk, ITask, IUpdateTask, TaskLabelsT } from '../../types/desk.types'
+import { IDesk, ITask, IUpdateDesk, IUpdateTask, TaskLabelsT } from '../../types/desk.types'
 import { nanoid } from 'nanoid'
 import { deskStoreInitialState } from './DeskStore.initial'
 
@@ -16,13 +16,28 @@ export default class DeskStore {
     })
   }
 
-  saveDesksToLS() {
+  private saveDesksToLS(): void {
     localStorage.setItem('userdesks', JSON.stringify(this.desks))
   }
 
-  updateDesks(desks: Array<IDesk>) {
+  updateDesksOrder(desks: Array<IDesk>) {
     this.desks = desks
     this.saveDesksToLS()
+  }
+
+  createDesk(title: string) {
+    const newDesk = {
+      id: nanoid(6),
+      title,
+      items: [],
+      isHidden: false
+    }
+    this.desks.push(newDesk)
+    this.saveDesksToLS()
+  }
+
+  updateDeskData(id: string, data: IUpdateDesk) {
+    this.desks = this.desks.map((desk) => desk.id === id ? { ...desk, ...data } : desk)
   }
 
   addTask(desk: IDesk, task: ITask, idx?: number) {
