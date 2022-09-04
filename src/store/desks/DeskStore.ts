@@ -20,10 +20,9 @@ export default class DeskStore {
     localStorage.setItem('userdesks', JSON.stringify(this.desks))
   }
 
-  updateDesksOrder(desks: Array<IDesk>) {
-    this.desks = desks
-    this.saveDesksToLS()
-  }
+
+  // --------------- Desk methods ---------------
+
 
   createDesk(title: string) {
     const newDesk = {
@@ -36,10 +35,28 @@ export default class DeskStore {
     this.saveDesksToLS()
   }
 
+  updateDesksOrder(desks: Array<IDesk>) {
+    this.desks = desks
+    this.saveDesksToLS()
+  }
+
   updateDeskData(id: string, data: IUpdateDesk) {
     this.desks = this.desks.map((desk) => desk.id === id ? { ...desk, ...data } : desk)
     this.saveDesksToLS()
   }
+
+  deleteDesk(id: string) {
+    this.desks = this.desks.filter((desk) => desk.id !== id)
+    this.saveDesksToLS()
+  }
+
+  setCurrentDesk(desk: IDesk | null) {
+    this.currentDesk = desk
+  }
+
+
+  // --------------- Task methods ---------------
+
 
   addTask(desk: IDesk, task: ITask, idx?: number) {
     const deskIndex = this.desks.findIndex((it) => it.id === desk.id)
@@ -85,10 +102,6 @@ export default class DeskStore {
       })
     }
     this.saveDesksToLS()
-  }
-
-  setCurrentDesk(desk: IDesk | null) {
-    this.currentDesk = desk
   }
 
   setCurrentTask(task: ITask | null) {

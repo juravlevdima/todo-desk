@@ -3,12 +3,13 @@ import { motion } from 'framer-motion'
 import closeIcon from '../../images/close.svg'
 import { useStores } from '../../hooks/useStores'
 import AsideMenuItem from './AsideMenuItem'
+import { observer } from 'mobx-react-lite'
 
 type propTypes = {
   setIsMenuOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const AsideMenu: FC<propTypes> = ({ setIsMenuOpen }) => {
+const AsideMenu: FC<propTypes> = observer(({ setIsMenuOpen }) => {
   const { deskStore } = useStores()
 
   return (
@@ -30,11 +31,16 @@ const AsideMenu: FC<propTypes> = ({ setIsMenuOpen }) => {
       >
         <ul className="">
           {deskStore.desks.map((desk) => (
-            <AsideMenuItem desk={desk} key={desk.id} updateDeskData={deskStore.updateDeskData.bind(deskStore)}/>
+            <AsideMenuItem
+              desk={desk}
+              key={desk.id}
+              updateDeskData={deskStore.updateDeskData.bind(deskStore)}
+              deleteDesk={deskStore.deleteDesk.bind(deskStore)}
+            />
           ))}
         </ul>
 
-        <h2 className="absolute top-2 left-0 right-0 text-center text-xl">Отобразить/Скрыть:</h2>
+        <h2 className="absolute top-4 left-0 right-0 text-center text-xl">Отобразить/Скрыть:</h2>
         <button
           className="h-6 w-6 hover:scale-125 transition duration-300 absolute top-2 right-2"
           title="Закрыть"
@@ -45,6 +51,6 @@ const AsideMenu: FC<propTypes> = ({ setIsMenuOpen }) => {
       </motion.aside>
     </>
   )
-}
+})
 
 export default AsideMenu

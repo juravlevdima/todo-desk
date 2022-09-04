@@ -40,7 +40,7 @@ const Header: FC = () => {
           <div
             role="button"
             tabIndex={0}
-            className="w-12 bg-gray-700 rounded-full relative outline-blue-600"
+            className="w-12 bg-gray-700 rounded-full relative outline-blue-600 select-none"
             onClick={changeTheme}
           >
             <span>🌞 🌜</span>

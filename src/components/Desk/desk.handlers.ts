@@ -5,11 +5,11 @@ import styles from './Desk.module.scss'
 
 const { deskStore } = store
 
-export const dropCardHandler = (e: DragEvent<HTMLDivElement>, desk: IDesk) => {
+export const dropCardHandler = (e: DragEvent<HTMLDivElement>, desk: IDesk, idx?: number) => {
   e.preventDefault()
   if (deskStore.currentDesk && deskStore.currentTask) {
     deskStore.deleteTask(deskStore.currentDesk, deskStore.currentTask.id)
-    deskStore.addTask(desk, deskStore.currentTask)
+    deskStore.addTask(desk, deskStore.currentTask, idx)
   }
 
   deskStore.setCurrentDesk(null)

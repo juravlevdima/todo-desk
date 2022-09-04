@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react'
+import { FC, useContext, useState, FocusEvent, DragEvent } from 'react'
 import dragHandle from '../../images/drag-handle.svg'
 import { AnimatePresence, DragControls } from 'framer-motion'
 import AddTaskModal from '../Modals/AddTaskModal/AddTaskModal'
@@ -11,16 +11,22 @@ import { useStores } from '../../hooks/useStores'
 type propTypes = {
   desk: IDesk
   controls: DragControls
+  onDrop: (e: DragEvent<HTMLDivElement>) => void
 }
 
-const DeskHeader: FC<propTypes> = ({ desk, controls }) => {
+const DeskHeader: FC<propTypes> = ({ desk, controls, onDrop }) => {
   const { theme } = useContext(ThemeContext) as IThemeContext
   const { deskStore } = useStores()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isRename, setIsRename] = useState(false)
 
+  const saveTitle = (e: FocusEvent<HTMLInputElement>) => {
+    deskStore.updateDeskData(desk.id, { title: e.target.value })
+    setIsRename(false)
+  }
+
   return (
-    <div className="mb-3 flex justify-between">
+    <div className="pb-3 flex justify-between" onDrop={onDrop}>
       <img
         className="cursor-grab active:cursor-grabbing select-none"
         onPointerDown={(e) => controls.start(e)}
@@ -33,12 +39,12 @@ const DeskHeader: FC<propTypes> = ({ desk, controls }) => {
       <div className="text-lg font-semibold text-center px-3">
         {isRename
           ? <input
-            onBlur={(e) => deskStore.updateDeskData(desk.id, { title: e.target.value })}
+            onBlur={saveTitle}
             className="bg-transparent text-center w-40"
             type="text" defaultValue={desk.title}
             autoFocus
           />
-          : <h2 className="cursor-pointer" onDoubleClick={() => setIsRename(true)}>
+          : <h2 className="cursor-pointer break-all" onDoubleClick={() => setIsRename(true)}>
             {desk.title}
           </h2>
         }

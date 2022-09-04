@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, DragEvent } from 'react'
 import { Reorder, useDragControls } from 'framer-motion'
 import { IDesk } from '../../types/desk.types'
 import DeskItem from './DeskItem'
@@ -29,7 +29,11 @@ const Desk: FC<propTypes> = ({ desk }) => {
         onDrop={(e) => dropCardHandler(e, desk)}
       >
         <div className={`p-5 rounded-md shadow-lg bg-white dark-theme dark:bg-dark-3 ${styles.desk}`} >
-          <DeskHeader desk={desk} controls={controls} />
+          <DeskHeader
+            desk={desk}
+            controls={controls}
+            onDrop={(e: DragEvent<HTMLDivElement>) => dropCardHandler(e, desk, 0)}
+          />
           <div>
             {desk.items.map((task) => <DeskItem key={task.id} task={task} desk={desk}/>)}
           </div>
