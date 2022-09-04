@@ -5,10 +5,12 @@ import AddIcon from '../common/AddIcon'
 import { AnimatePresence } from 'framer-motion'
 import DeskModal from '../Modals/DeskModal/DeskModal'
 import menuIcon from '../../images/menu.svg'
+import AsideMenu from '../AsideMenu/AsideMenu'
 
 const Header: FC = () => {
   const { theme, toggleTheme } = useContext(ThemeContext) as IThemeContext
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
   const changeTheme = () => {
     toggleTheme(theme === 'light' ? 'dark' : 'light')
@@ -17,9 +19,13 @@ const Header: FC = () => {
   return (
     <>
       <header className="bg-gray-300 dark-theme dark:bg-dark-1">
-        <div className="container flex justify-between items-center py-2">
+        <div className="px-2 md:px-6 lg:px-8 xl:px-10 2xl:px-12 flex justify-between items-center py-2">
           <div>
-            <button className="hover:scale-125 transition duration-300 active:transition-none active:scale-100 mr-2">
+            <button
+              className="hover:scale-125 transition duration-300 active:transition-none active:scale-100 mr-2"
+              title="Открыть меню"
+              onClick={() => setIsMenuOpen(true)}
+            >
               <img src={menuIcon} alt="Menu"/>
             </button>
             <button
@@ -49,6 +55,10 @@ const Header: FC = () => {
 
       <AnimatePresence>
         {isModalOpen && <DeskModal setIsModalOpen={setIsModalOpen} />}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isMenuOpen && <AsideMenu setIsMenuOpen={setIsMenuOpen} />}
       </AnimatePresence>
     </>
   )

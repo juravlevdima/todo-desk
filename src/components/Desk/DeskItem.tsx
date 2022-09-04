@@ -43,7 +43,7 @@ const DeskItem: FC<propTypes> = ({ task, desk }) => {
         className={`px-6 pt-1 pb-3 break-words bg-zinc-100 rounded-md dark-theme dark:bg-dark-4
           ${!task.pinned && `cursor-grab active:cursor-grabbing ${styles.draggable}`}`}
       >
-        <div className={`pb-1 font-semibold ${task.description && 'border-b border-gray-400'}`}>{task.title}</div>
+        <h3 className={`pb-1 font-semibold ${task.description && 'border-b border-gray-400'}`}>{task.title}</h3>
         {task.description && <div className="pl-2 py-1 mb-2 font-light text-sm">{task.description}</div>}
         <div className="flex justify-between items-center">
           <div className="flex items-center">

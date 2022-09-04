@@ -13,10 +13,10 @@ const Main: FC = observer(() => {
         onReorder={deskStore.updateDesksOrder.bind(deskStore)}
         values={deskStore.desks}
         axis="x"
-        className="flex"
+        className="flex -mx-3"
       >
         {deskStore.desks.map((desk) => (
-          <Desk desk={desk} key={desk.id}/>
+          !desk.isHidden && <Desk desk={desk} key={desk.id}/>
         ))}
       </Reorder.Group>
     </div>

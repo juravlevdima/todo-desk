@@ -38,9 +38,9 @@ const DeskHeader: FC<propTypes> = ({ desk, controls }) => {
             type="text" defaultValue={desk.title}
             autoFocus
           />
-          : <span className="cursor-pointer" onDoubleClick={() => setIsRename(true)}>
+          : <h2 className="cursor-pointer" onDoubleClick={() => setIsRename(true)}>
             {desk.title}
-          </span>
+          </h2>
         }
       </div>
 
