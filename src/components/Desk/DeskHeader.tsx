@@ -1,7 +1,7 @@
 import { FC, useContext, useState, FocusEvent, DragEvent } from 'react'
 import dragHandle from '../../images/drag-handle.svg'
 import { AnimatePresence, DragControls } from 'framer-motion'
-import AddTaskModal from '../Modals/AddTaskModal/AddTaskModal'
+import TaskModal from '../Modals/AddTaskModal/TaskModal'
 import { IDesk } from '../../types/desk.types'
 import AddIcon from '../common/AddIcon'
 import { ThemeContext } from '../Providers/ThemeProvider'
@@ -59,7 +59,7 @@ const DeskHeader: FC<propTypes> = ({ desk, controls, onDrop }) => {
       </button>
 
       <AnimatePresence>
-        {isModalOpen && <AddTaskModal setIsModalOpen={setIsModalOpen} desk={desk}/>}
+        {isModalOpen && <TaskModal setIsModalOpen={setIsModalOpen} desk={desk} title="Добавить задачу" action="Добавить"/>}
       </AnimatePresence>
     </div>
   )

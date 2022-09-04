@@ -1,26 +1,38 @@
-import { FC, useId } from 'react'
+import { Dispatch, FC, SetStateAction, useId } from 'react'
 import ModalInput from '../common/ModalInput'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { useStores } from '../../../hooks/useStores'
-import { addTaskModalPropsT } from './AddTaskModal'
 import RadioButton from '../../common/RadioButton'
+import { IDesk, IUpdateTask } from '../../../types/desk.types'
+import { TaskModalActionT } from './TaskModal'
 
+type propTypes = {
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>
+  desk: IDesk
+  action: TaskModalActionT
+  taskData?: IUpdateTask
+}
 
-const AddTaskModalForm: FC<addTaskModalPropsT> = ({ desk, setIsModalOpen }) => {
+const TaskModalForm: FC<propTypes> = ({ setIsModalOpen, desk, action, taskData }) => {
   const { register, handleSubmit } = useForm<FieldValues>()
   const { deskStore } = useStores()
   const dateInputId = useId()
 
-  const addTask: SubmitHandler<FieldValues> = (d) => {
+  const submitTask: SubmitHandler<FieldValues> = (d) => {
     setIsModalOpen(false)
     deskStore.createTask(desk, d.title, d.description, d.label, d.expirationDate)
   }
 
 
   return (
-    <form onSubmit={handleSubmit(addTask)}>
+    <form onSubmit={handleSubmit(submitTask)}>
       <div className="flex flex-col px-6 py-4 bg-gray-50 dark-theme dark:bg-dark-2">
-        <ModalInput register={register} text="Заголовок" name="title" autoFocus={true} />
+        <ModalInput
+          register={register}
+          text="Заголовок"
+          name="title"
+          autoFocus={true}
+        />
         <textarea
           placeholder="Введите описание... (Максимум 300 символов)"
           className="input-field py-2 mb-5 h-20"
@@ -52,11 +64,11 @@ const AddTaskModalForm: FC<addTaskModalPropsT> = ({ desk, setIsModalOpen }) => {
           className="px-4 py-2 text-white font-semibold bg-blue-500 hover:bg-blue-600 rounded"
           type="submit"
         >
-          Добавить
+          {action}
         </button>
       </div>
     </form>
   )
 }
 
-export default AddTaskModalForm
+export default TaskModalForm

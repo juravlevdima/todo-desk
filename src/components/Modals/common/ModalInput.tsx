@@ -6,9 +6,10 @@ type propTypes = {
   text: string
   name: string
   autoFocus?: boolean
+  defaultValue?: string
 }
 
-const ModalInput: FC<propTypes> = ({ register, text, name, autoFocus = false }) => {
+const ModalInput: FC<propTypes> = ({ register, text, name, autoFocus = false, defaultValue }) => {
   const titleId = useId()
 
   return (
@@ -18,6 +19,7 @@ const ModalInput: FC<propTypes> = ({ register, text, name, autoFocus = false }) 
         type="text"
         id={titleId}
         autoFocus={autoFocus}
+        defaultValue={defaultValue}
         className="input-field py-1 w-full"
         {...register(name)}
       />

@@ -13,6 +13,7 @@ type propTypes = {
 
 const Desk: FC<propTypes> = ({ desk }) => {
   const controls = useDragControls()
+
   return (
     <Reorder.Item
       value={desk}
@@ -28,14 +29,20 @@ const Desk: FC<propTypes> = ({ desk }) => {
         onDragOver={(e) => cardDragOverHandler(e)}
         onDrop={(e) => dropCardHandler(e, desk)}
       >
-        <div className={`p-5 rounded-md shadow-lg bg-white dark-theme dark:bg-dark-3 ${styles.desk}`} >
+        <div className={`p-5 rounded-md shadow-lg bg-white dark-theme dark:bg-dark-3 ${styles.desk}`}>
           <DeskHeader
             desk={desk}
             controls={controls}
             onDrop={(e: DragEvent<HTMLDivElement>) => dropCardHandler(e, desk, 0)}
           />
           <div>
-            {desk.items.map((task) => <DeskItem key={task.id} task={task} desk={desk}/>)}
+            {desk.items.map((task) => (
+              <DeskItem
+                key={task.id}
+                task={task}
+                desk={desk}
+              />
+            ))}
           </div>
         </div>
       </div>

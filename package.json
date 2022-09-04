@@ -1,6 +1,6 @@
 {
   "name": "todo-desk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "scripts": {
     "start": "cross-env NODE_ENV=production yarn run build && webpack serve --open",
