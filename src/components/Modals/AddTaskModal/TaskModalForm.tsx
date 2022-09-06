@@ -10,17 +10,22 @@ type propTypes = {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
   desk: IDesk
   action: TaskModalActionT
-  taskData?: IUpdateTask
+  defaultValues?: IUpdateTask
+  editableTaskId?: string
 }
 
-const TaskModalForm: FC<propTypes> = ({ setIsModalOpen, desk, action, taskData }) => {
+const TaskModalForm: FC<propTypes> = ({ setIsModalOpen, desk, action, defaultValues, editableTaskId }) => {
   const { register, handleSubmit } = useForm<FieldValues>()
   const { deskStore } = useStores()
   const dateInputId = useId()
 
   const submitTask: SubmitHandler<FieldValues> = (d) => {
     setIsModalOpen(false)
-    deskStore.createTask(desk, d.title, d.description, d.label, d.expirationDate)
+    if (action === 'Добавить') {
+      deskStore.createTask(desk, d.title, d.description, d.label, d.expirationDate)
+    } else if (action === 'Сохранить' && editableTaskId) {
+      deskStore.updateTask(editableTaskId, desk, { ...d })
+    }
   }
 
 
@@ -32,11 +37,13 @@ const TaskModalForm: FC<propTypes> = ({ setIsModalOpen, desk, action, taskData }
           text="Заголовок"
           name="title"
           autoFocus={true}
+          defaultValue={defaultValues?.title}
         />
         <textarea
           placeholder="Введите описание... (Максимум 300 символов)"
           className="input-field py-2 mb-5 h-20"
           maxLength={300}
+          defaultValue={defaultValues?.description}
           {...register('description')}
         />
         <div className="mb-5 flex items-center justify-between">
@@ -44,15 +51,21 @@ const TaskModalForm: FC<propTypes> = ({ setIsModalOpen, desk, action, taskData }
           <input
             type="date"
             id={dateInputId}
+            // @ts-ignore
+            defaultValue={defaultValues?.expirationDate}
             className="input-field py-1 w-full"
             {...register('expirationDate')}
           />
         </div>
         <div className="flex flex-wrap items-center">
           <div className="font-semibold text-sm mr-10">Метка:</div>
-          <RadioButton name="label" text="Обычный" register={register} defaultChecked={true}/>
-          <RadioButton name="label" text="Важно" register={register}/>
-          <RadioButton name="label" text="Срочно" register={register}/>
+          <RadioButton
+            name="label"
+            text="Обычный"
+            register={register}
+            defaultChecked={defaultValues?.label === 'Обычный' || true}/>
+          <RadioButton name="label" text="Важно" register={register} defaultChecked={defaultValues?.label === 'Важно'}/>
+          <RadioButton name="label" text="Срочно" register={register} defaultChecked={defaultValues?.label === 'Срочно'}/>
         </div>
       </div>
 

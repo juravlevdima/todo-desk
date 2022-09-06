@@ -7,6 +7,7 @@ import { deskStoreInitialState } from './DeskStore.initial'
 export default class DeskStore {
   currentDesk: null | IDesk = null
   currentTask: null | ITask = null
+  editableTask: null | ITask = null
   desks: Array<IDesk> = []
 
   constructor() {
@@ -101,10 +102,16 @@ export default class DeskStore {
           : task
       })
     }
+    this.editableTask = null
     this.saveDesksToLS()
   }
 
   setCurrentTask(task: ITask | null) {
     this.currentTask = task
+  }
+
+  setEditableTask(deskId: string | null, taskId: string | null) {
+    const desk = this.desks.find((it) => it.id === deskId)
+    this.editableTask = desk?.items.find((task) => task.id === taskId) || null
   }
 }

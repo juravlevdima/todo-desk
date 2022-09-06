@@ -1,4 +1,4 @@
-import { FC, memo } from 'react'
+import { Dispatch, FC, memo, SetStateAction } from 'react'
 import { IDesk, ITask } from '../../types/desk.types'
 import { dragEndHandler, dragOverHandler, dragStartHandler, dropHandler } from './desk.handlers'
 import DeskItemLabel from './DeskItemLabel'
@@ -14,9 +14,10 @@ import styles from './Desk.module.scss'
 type propTypes = {
   task: ITask
   desk: IDesk
+  setIsEditOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const DeskItem: FC<propTypes> = ({ task, desk }) => {
+const DeskItem: FC<propTypes> = ({ task, desk, setIsEditOpen }) => {
   const { deskStore } = useStores()
 
   const isOverdue = task.expirationDate
@@ -27,6 +28,11 @@ const DeskItem: FC<propTypes> = ({ task, desk }) => {
     if (window.confirm('Подтвердите удаление')) {
       deskStore.deleteTask(desk, task.id)
     }
+  }
+
+  const editModeHandler = () => {
+    setIsEditOpen(true)
+    deskStore.setEditableTask(desk.id, task.id)
   }
 
   return (
@@ -50,7 +56,7 @@ const DeskItem: FC<propTypes> = ({ task, desk }) => {
             <div className="flex items-center">
               <button
                 className="opacity-60 hover:opacity-100 p-1 mr-1"
-                // onClick={() => setEditMode(true)}
+                onClick={editModeHandler}
               >
                 <img src={editIcon} alt="Edit"/>
               </button>
@@ -78,10 +84,6 @@ const DeskItem: FC<propTypes> = ({ task, desk }) => {
           />
         </div>
       </div>
-
-      {/* <AnimatePresence>*/}
-      {/*  {editMode && <TaskModal setIsModalOpen={setEditMode} desk={desk} title="Редактировать" action="Сохранить"/>}*/}
-      {/* </AnimatePresence>*/}
     </>
   )
 }
