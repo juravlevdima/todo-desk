@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useId } from 'react'
+import { Dispatch, FC, SetStateAction, useEffect, useId } from 'react'
 import ModalInput from '../common/ModalInput'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { useStores } from '../../../hooks/useStores'
@@ -15,7 +15,7 @@ type propTypes = {
 }
 
 const TaskModalForm: FC<propTypes> = ({ setIsModalOpen, desk, action, defaultValues, editableTaskId }) => {
-  const { register, handleSubmit } = useForm<FieldValues>()
+  const { register, handleSubmit, formState: { errors }} = useForm<FieldValues>()
   const { deskStore } = useStores()
   const dateInputId = useId()
 
@@ -27,6 +27,10 @@ const TaskModalForm: FC<propTypes> = ({ setIsModalOpen, desk, action, defaultVal
       deskStore.updateTask(editableTaskId, desk, { ...d })
     }
   }
+
+  useEffect(() => {
+    console.log(errors)
+  }, [errors])
 
 
   return (
@@ -44,7 +48,7 @@ const TaskModalForm: FC<propTypes> = ({ setIsModalOpen, desk, action, defaultVal
           className="input-field py-2 mb-5 h-20"
           maxLength={300}
           defaultValue={defaultValues?.description}
-          {...register('description')}
+          {...register('description', { maxLength: 300 })}
         />
         <div className="mb-5 flex items-center justify-between">
           <label className="font-semibold text-sm mr-6 whitespace-nowrap" htmlFor={dateInputId}>Дата завершения</label>
@@ -63,16 +67,19 @@ const TaskModalForm: FC<propTypes> = ({ setIsModalOpen, desk, action, defaultVal
             name="label"
             text="Обычный"
             register={register}
-            defaultChecked={defaultValues?.label === 'Обычный' || true}/>
+            defaultChecked={defaultValues?.label === 'Обычный' || !defaultValues?.label}/>
           <RadioButton name="label" text="Важно" register={register} defaultChecked={defaultValues?.label === 'Важно'}/>
           <RadioButton name="label" text="Срочно" register={register} defaultChecked={defaultValues?.label === 'Срочно'}/>
         </div>
       </div>
 
       <div
-        className="flex items-center justify-end px-5 py-3 bg-white border-t border-gray-200 rounded-b-lg
+        className="flex items-center justify-between px-5 py-3 bg-white border-t border-gray-200 rounded-b-lg
           dark-theme dark:bg-dark-1 dark:border-none"
       >
+        <div className="text-red-500">
+          {errors?.title?.message && String(errors.title.message)}
+        </div>
         <button
           className="px-4 py-2 text-white font-semibold bg-blue-500 hover:bg-blue-600 rounded"
           type="submit"

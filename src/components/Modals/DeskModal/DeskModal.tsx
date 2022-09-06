@@ -10,7 +10,7 @@ type propTypes = {
 
 
 const DeskModal: FC<propTypes> = ({ setIsModalOpen }) => {
-  const { register, handleSubmit } = useForm<FieldValues>()
+  const { register, handleSubmit, formState: { errors }} = useForm<FieldValues>()
   const { deskStore } = useStores()
 
   const createDesk: SubmitHandler<FieldValues> = (d) => {
@@ -25,9 +25,12 @@ const DeskModal: FC<propTypes> = ({ setIsModalOpen }) => {
           <ModalInput register={register} text="Название" name="title" autoFocus={true}/>
         </div>
         <div
-          className="flex items-center justify-end px-5 py-3 bg-white border-t border-gray-200 rounded-b-lg
+          className="flex items-center justify-between px-5 py-3 bg-white border-t border-gray-200 rounded-b-lg
           dark-theme dark:bg-dark-1 dark:border-none"
         >
+          <div className="text-red-500">
+            {errors?.title?.message && String(errors.title.message)}
+          </div>
           <button
             className="px-4 py-2 text-white font-semibold bg-blue-500 hover:bg-blue-600 rounded"
             type="submit"

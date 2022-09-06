@@ -110,7 +110,7 @@ export default class DeskStore {
     this.currentTask = task
   }
 
-  setEditableTask(deskId: string | null, taskId: string | null) {
+  setEditableTask(taskId: string | null, deskId?: string) {
     const desk = this.desks.find((it) => it.id === deskId)
     this.editableTask = desk?.items.find((task) => task.id === taskId) || null
   }

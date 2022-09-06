@@ -32,7 +32,7 @@ const DeskItem: FC<propTypes> = ({ task, desk, setIsEditOpen }) => {
 
   const editModeHandler = () => {
     setIsEditOpen(true)
-    deskStore.setEditableTask(desk.id, task.id)
+    deskStore.setEditableTask(task.id, desk.id)
   }
 
   return (

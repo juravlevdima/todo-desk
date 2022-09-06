@@ -21,7 +21,7 @@ const ModalInput: FC<propTypes> = ({ register, text, name, autoFocus = false, de
         autoFocus={autoFocus}
         defaultValue={defaultValue}
         className="input-field py-1 w-full"
-        {...register(name)}
+        {...register(name, { required: 'Поле заголовок обязательно для заполнения', minLength: 1, maxLength: 100 })}
       />
     </div>
   )

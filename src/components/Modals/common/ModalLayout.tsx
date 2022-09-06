@@ -1,6 +1,7 @@
 import { Dispatch, FC, SetStateAction, ReactNode, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import ModalHeader from './ModalHeader'
+import { useStores } from '../../../hooks/useStores'
 
 type propTypes = {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
@@ -9,12 +10,15 @@ type propTypes = {
 }
 
 const ModalLayout: FC<propTypes> = ({ setIsModalOpen, title, children }) => {
+  const { deskStore } = useStores()
+
   useEffect(() => {
     document.body.style.overflow = 'hidden'
     return () => {
       document.body.style.overflow = 'auto'
+      deskStore.setEditableTask(null)
     }
-  }, [])
+  }, [deskStore])
 
   return (
     <>
