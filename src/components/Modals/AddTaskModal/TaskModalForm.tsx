@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useEffect, useId } from 'react'
+import { Dispatch, FC, SetStateAction, useId } from 'react'
 import ModalInput from '../common/ModalInput'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { useStores } from '../../../hooks/useStores'
@@ -27,11 +27,6 @@ const TaskModalForm: FC<propTypes> = ({ setIsModalOpen, desk, action, defaultVal
       deskStore.updateTask(editableTaskId, desk, { ...d })
     }
   }
-
-  useEffect(() => {
-    console.log(errors)
-  }, [errors])
-
 
   return (
     <form onSubmit={handleSubmit(submitTask)}>

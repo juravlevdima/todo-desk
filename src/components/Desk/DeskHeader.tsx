@@ -21,7 +21,10 @@ const DeskHeader: FC<propTypes> = ({ desk, controls, onDrop }) => {
   const [isRename, setIsRename] = useState(false)
 
   const saveTitle = (e: FocusEvent<HTMLInputElement>) => {
-    deskStore.updateDeskData(desk.id, { title: e.target.value })
+    const trimmed = e.target.value.trim()
+    if (trimmed) {
+      deskStore.updateDeskData(desk.id, { title: trimmed })
+    }
     setIsRename(false)
   }
 

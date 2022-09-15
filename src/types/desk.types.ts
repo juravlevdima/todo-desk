@@ -4,9 +4,9 @@ export interface ITask {
   id: string
   title: string
   description?: string
-  label?: TaskLabelsT
-  inProgress?: boolean
-  isCompleted?: boolean
+  label: TaskLabelsT
+  inProgress: boolean
+  isCompleted: boolean
   pinned: boolean
   createdDate?: Date
   expirationDate?: string | null
